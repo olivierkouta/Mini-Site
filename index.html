@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="pageTitle">AI Systems Architect: Custom Solutions for Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #E5E3DF;
+    --bg-panel: #F0EEEA;
+    --bg-panel-2: #D9D6D1;
+    --grid-line: rgba(61,90,128,0.08);
+    --grid-line-strong: rgba(61,90,128,0.18);
+    --line-accent: #3D5A80;
+    --line-accent-soft: rgba(61,90,128,0.35);
+    --text-primary: #1C1E22;
+    --text-secondary: #5B6472;
+    --text-dim: #8C93A0;
+    --accent: #3D5A80;
+    --accent-hover: #4C6D96;
+    --accent-soft: rgba(61,90,128,0.10);
+    --radius: 3px;
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Blueprint grid backdrop ---------- */
+  .grid-backdrop{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  h1,h2,h3{ font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.01em; }
+
+  .label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--line-accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .label::before{
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: var(--line-accent);
+    display: inline-block;
+  }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 560px){
+    .wrap{ padding: 0 20px; }
+  }
+
+  section{ position: relative; z-index: 1; }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 15px 28px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-primary{
+    background: var(--accent);
+    color: #F7F6F4;
+    font-weight: 500;
+  }
+  .btn-primary:hover{ background: var(--accent-hover); transform: translateY(-1px); }
+  .btn-secondary{
+    background: transparent;
+    border-color: var(--grid-line-strong);
+    color: var(--text-primary);
+  }
+  .btn-secondary:hover{ border-color: var(--line-accent); color: var(--line-accent); transform: translateY(-1px); }
+  .btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* ---------- Nav ---------- */
+  header{
+    position: sticky; top:0; z-index: 20;
+    background: rgba(229,227,223,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--grid-line-strong);
+  }
+  .nav{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .nav-logo{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+  }
+  .nav-logo span{ color: var(--accent); }
+  .nav-right{ display: flex; align-items: center; gap: 14px; }
+  .nav a.btn{ padding: 10px 20px; font-size: 12px; }
+
+  @media (max-width: 560px){
+    .nav{ padding: 14px 20px; gap: 10px; flex-wrap: wrap; }
+    .nav-logo span:last-child{ display: none; }
+    .nav-right{ gap: 8px; }
+    .nav a.btn{ padding: 9px 16px; font-size: 11px; }
+    .lang-btn{ padding: 6px 10px; font-size: 10px; }
+  }
+
+  /* ---------- Language toggle ---------- */
+  .lang-toggle{
+    display: flex;
+    gap: 2px;
+    background: var(--bg-panel-2);
+    border: 1px solid var(--grid-line-strong);
+    border-radius: 999px;
+    padding: 3px;
+  }
+  .lang-btn{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 6px 13px;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .lang-btn.active{ background: var(--accent); color: #F7F6F4; }
+  .lang-btn:hover:not(.active){ color: var(--text-primary); }
+  .lang-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 110px 0 90px;
+    position: relative;
+  }
+  @media (max-width: 560px){
+    .hero{ padding: 70px 0 56px; }
+  }
+  .hero-inner{ max-width: 760px; }
+  .hero h1{
+    font-size: clamp(34px, 5.2vw, 58px);
+    font-weight: 600;
+    line-height: 1.08;
+    margin: 22px 0 24px;
+  }
+  .hero h1 em{
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero p.sub{
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin-bottom: 40px;
+  }
+  .hero-actions{ display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* schematic line connecting hero to buttons */
+  .hero-schema{
+    position: absolute;
+    right: 4%;
+    top: 90px;
+    width: 340px;
+    max-width: 34vw;
+    opacity: 0.9;
+  }
+  @media (max-width: 900px){ .hero-schema{ display:none; } }
+
+  .coords{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 46px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- Section shell ---------- */
+  .section{ padding: 100px 0; border-top: 1px solid var(--grid-line-strong); }
+  .section-head{ margin-bottom: 48px; max-width: 640px; }
+  .section-head h2{
+    font-size: clamp(26px, 3.4vw, 36px);
+    font-weight: 600;
+    margin-top: 16px;
+  }
+  @media (max-width: 560px){
+    .section{ padding: 60px 0; }
+    .section-head{ margin-bottom: 32px; }
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  @media (max-width: 800px){ .about-grid{ grid-template-columns: 1fr; } }
+
+  .portrait{
+    aspect-ratio: 4/5;
+    background: var(--bg-panel);
+    border: 1px solid var(--grid-line-strong);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .portrait::before{
+    content: "";
+    position: absolute; inset:0;
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .portrait-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align:center;
+    position: relative;
+    padding: 20px;
+  }
+  .portrait-label strong{ display:block; color: var(--text-secondary); font-size: 13px; margin-bottom:6px; }
+
+  .about-text p{ color: var(--text-secondary); font-size: 16.5px; margin-bottom: 18px; max-width: 620px; }
+  .about-text strong{ color: var(--text-primary); font-weight: 500; }
+
+  .pillars{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--grid-line-strong);
+    border: 1px solid var(--grid-line-strong);
+    margin-top: 36px;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  @media (max-width: 640px){ .pillars{ grid-template-columns: 1fr; } }
+  .pillar{ background: var(--bg-panel); padding: 24px 22px; }
+  .pillar .label{ margin-bottom: 10px; }
+  .pillar p{ color: var(--text-secondary); font-size: 14.5px; }
+
+  /* ---------- Conferences carousel ---------- */
+  .carousel-wrap{ position: relative; }
+  .carousel{
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+  }
+  .carousel::-webkit-scrollbar{ display:none; }
+  .conf-card{
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    background: var(--bg-panel);
+    border: 1px solid var(--grid-line-strong);
+    border-radius: var(--radius);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+  }
+  @media (max-width: 480px){
+    .conf-card{ flex-basis: 82vw; padding: 22px; }
+  }
+  .conf-card .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+  .conf-card h3{ font-size: 20px; margin-bottom: 10px; font-weight: 600; }
+  .conf-card p{ color: var(--text-secondary); font-size: 14.5px; flex-grow: 1; }
+  .conf-card .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--line-accent);
+    letter-spacing: 0.05em;
+    margin-top: 18px;
+    text-transform: uppercase;
+  }
+
+  .carousel-nav{ display:flex; gap: 10px; margin-top: 22px; }
+  .carousel-btn{
+    width: 40px; height: 40px;
+    border: 1px solid var(--grid-line-strong);
+    background: transparent;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .carousel-btn:hover{ border-color: var(--line-accent); color: var(--line-accent); }
+  .carousel-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ---------- Solutions grid ---------- */
+  .solutions-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 760px){ .solutions-grid{ grid-template-columns: 1fr; } }
+
+  .solution-card{
+    background: var(--bg-panel);
+    border: 1px solid var(--grid-line-strong);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .video-slot{
+    aspect-ratio: 16/9;
+    background: var(--bg-panel-2);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--grid-line-strong);
+  }
+  .video-slot::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .play-icon{
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    border: 1px solid var(--line-accent-soft);
+    display:flex; align-items:center; justify-content:center;
+    position: relative;
+    z-index:1;
+  }
+  .play-icon svg{ fill: var(--line-accent); margin-left: 3px; }
+  .video-caption{
+    position:absolute; bottom: 12px; left: 14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    z-index:1;
+  }
+  .solution-body{ padding: 22px 24px; }
+  .solution-body .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .solution-body h3{ font-size: 18px; margin: 8px 0 8px; font-weight: 600; }
+  .solution-body p{ color: var(--text-secondary); font-size: 14px; }
+
+  /* ---------- Footer CTA ---------- */
+  .footer-cta{
+    padding: 110px 0 90px;
+    text-align: center;
+    position: relative;
+    border-top: 1px solid var(--grid-line-strong);
+  }
+  @media (max-width: 560px){
+    .footer-cta{ padding: 64px 0 56px; }
+  }
+  .footer-cta h2{
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 600;
+    margin: 18px auto 14px;
+    max-width: 620px;
+  }
+  .footer-cta p{ color: var(--text-secondary); max-width: 480px; margin: 0 auto 36px; }
+  .footer-cta .label{ justify-content:center; }
+  .footer-cta .label::before{ display:none; }
+
+  footer.site-footer{
+    padding: 32px;
+    text-align: center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--grid-line-strong);
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{ opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in{ opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-backdrop"></div>
+
+<header>
+  <div class="nav">
+    <div class="nav-logo" data-i18n="navLogo">SYSTEM<span>.</span>AI <span style="color:var(--text-dim)">// AI solutions architect</span></div>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language selector">
+        <button class="lang-btn active" id="langEn" type="button">EN</button>
+        <button class="lang-btn" id="langFr" type="button">FR</button>
+      </div>
+      <a href="#rdv" class="btn btn-primary" data-i18n="btnBookCall">Book a call</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="label" data-i18n="heroEyebrow">AI Engineer, Architect of Intelligent Systems</span>
+      <h1 data-i18n="heroTitle">I design infrastructure that turns <em>two weeks of work</em> into three days.</h1>
+      <p class="sub" data-i18n="heroSub">Voice agents, web agents, email automation, resume screening, AI cybersecurity: custom systems for businesses losing time, money, or efficiency on repetitive tasks.</p>
+      <div class="hero-actions">
+        <a href="#rdv" class="btn btn-primary" data-i18n="btnBookCall">Book a call</a>
+        <a href="#solutions" class="btn btn-secondary" data-i18n="heroBtnSecondary">See my solutions</a>
+      </div>
+      <div class="coords" data-i18n="heroCoords">OTTAWA, ON · AVAILABLE FOR ON-SITE CONSULTATION</div>
+    </div>
+  </div>
+
+  <svg class="hero-schema" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="230" cy="30" r="4" fill="#3D5A80"/>
+    <circle cx="60" cy="120" r="4" fill="#3D5A80" fill-opacity="0.55"/>
+    <circle cx="250" cy="180" r="4" fill="#3D5A80"/>
+    <circle cx="90" cy="230" r="4" fill="#3D5A80" fill-opacity="0.55"/>
+    <path d="M230 30 L60 120 L250 180 L90 230" stroke="#3D5A80" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="20" y="100" width="40" height="40" stroke="#3D5A80" stroke-opacity="0.3"/>
+    <rect x="210" y="10" width="40" height="40" stroke="#3D5A80" stroke-opacity="0.3"/>
+  </svg>
+</section>
+
+<section class="section reveal" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="portrait">
+        <div class="portrait-label" data-i18n="portraitLabel">
+          <strong>Photo space</strong>
+          Professional portrait to be added, 4:5 format
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="label" data-i18n="aboutEyebrow">About me</span>
+        <h2 style="margin-top:16px; font-size: 28px;" data-i18n="aboutH2">AI engineer, and seller of results.</h2>
+        <p data-i18n="aboutP1">I'm an <strong>AI engineer</strong> and <strong>applied AI systems architect</strong>. In practice, I sit down with businesses, identify where they're losing time, money, or efficiency, then build the solution that fixes it.</p>
+        <p data-i18n="aboutP2">Thanks to my background in <strong>client acquisition</strong>, I don't just build intelligent systems, I know how to sell them too. I find my own clients, working independently or with full teams, from voice agents to AI agent infrastructure.</p>
+        <div class="pillars">
+          <div class="pillar">
+            <span class="label" style="font-size:11px;" data-i18n="pillar1Name">Relieved teams</span>
+            <p data-i18n="pillar1P">Repetitive tasks get handled, not added to the list.</p>
+          </div>
+          <div class="pillar">
+            <span class="label" style="font-size:11px;" data-i18n="pillar2Name">Time regained</span>
+            <p data-i18n="pillar2P">Your teams focus on what actually matters.</p>
+          </div>
+          <div class="pillar">
+            <span class="label" style="font-size:11px;" data-i18n="pillar3Name">Multiplied efficiency</span>
+            <p data-i18n="pillar3P">Two weeks of work, delivered in three days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="conferences">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label" data-i18n="confEyebrow">Talks</span>
+      <h2 data-i18n="confH2">On stage, as much as in the field.</h2>
+    </div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="confCarousel">
+        <div class="conf-card">
+          <div class="num" data-i18n="conf1Num">Talk 01</div>
+          <h3>CESOC</h3>
+          <p data-i18n="conf1P">Talk on applied artificial intelligence, presented to an audience of entrepreneurs and professionals.</p>
+          <div class="tag" data-i18n="conf1Tag">AI applied to business</div>
+        </div>
+        <div class="conf-card">
+          <div class="num" data-i18n="conf2Num">Talk 02</div>
+          <h3>La Cité collégiale</h3>
+          <p data-i18n="conf2P">Talk on the practical use of AI in business, presented in a college setting to students and professionals.</p>
+          <div class="tag" data-i18n="conf2Tag">Training and awareness</div>
+        </div>
+        <div class="conf-card">
+          <div class="num" data-i18n="conf3Num">Talk 03</div>
+          <h3 data-i18n="conf3H3">Real estate</h3>
+          <p data-i18n="conf3P">Talk for real estate agents and investors on automating prospect qualification.</p>
+          <div class="tag" data-i18n="conf3Tag">Agents and investors</div>
+        </div>
+        <div class="conf-card">
+          <div class="num" data-i18n="conf4Num">Talk 04</div>
+          <h3>Trading</h3>
+          <p data-i18n="conf4P">Presentation on using AI for traders, to automate research and market analysis.</p>
+          <div class="tag" data-i18n="conf4Tag">Financial markets</div>
+        </div>
+        <div class="conf-card">
+          <div class="num" data-i18n="conf5Num">Talk 05</div>
+          <h3>Marketing</h3>
+          <p data-i18n="conf5P">Talk on integrating AI into client acquisition and conversion strategies.</p>
+          <div class="tag" data-i18n="conf5Tag">Client acquisition</div>
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="confPrev" aria-label="Previous talk">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="carousel-btn" id="confNext" aria-label="Next talk">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="solutions">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="label" data-i18n="solEyebrow">Delivered solutions</span>
+      <h2 data-i18n="solH2">Four real problems, four systems delivered.</h2>
+    </div>
+    <div class="solutions-grid">
+
+      <div class="solution-card">
+        <div class="video-slot">
+          <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-caption" data-i18n="sol1Caption">[ Video to be added ]</span>
+        </div>
+        <div class="solution-body">
+          <span class="tag" data-i18n="sol1Tag">Dental clinic</span>
+          <h3 data-i18n="sol1H3">Web booking agent</h3>
+          <p data-i18n="sol1P">An AI agent built into the website that responds to patients and manages appointment booking automatically.</p>
+        </div>
+      </div>
+
+      <div class="solution-card">
+        <div class="video-slot">
+          <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-caption" data-i18n="sol2Caption">[ Video to be added ]</span>
+        </div>
+        <div class="solution-body">
+          <span class="tag" data-i18n="sol2Tag">Real estate agency</span>
+          <h3 data-i18n="sol2H3">Prospect qualification web agent</h3>
+          <p data-i18n="sol2P">An AI agent that greets website visitors, answers their questions, and qualifies prospects before handing them to the team.</p>
+        </div>
+      </div>
+
+      <div class="solution-card">
+        <div class="video-slot">
+          <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-caption" data-i18n="sol3Caption">[ Video to be added ]</span>
+        </div>
+        <div class="solution-body">
+          <span class="tag" data-i18n="sol3Tag">Restaurant</span>
+          <h3 data-i18n="sol3H3">Voice reservation agent</h3>
+          <p data-i18n="sol3P">An AI voice agent that answers the phone and takes reservations, without making the customer wait.</p>
+        </div>
+      </div>
+
+      <div class="solution-card">
+        <div class="video-slot">
+          <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-caption" data-i18n="sol4Caption">[ Video to be added ]</span>
+        </div>
+        <div class="solution-body">
+          <span class="tag" data-i18n="sol4Tag">Organization</span>
+          <h3 data-i18n="sol4H3">Email response agent</h3>
+          <p data-i18n="sol4P">An AI agent that sorts and replies to incoming emails, while filtering out phishing attempts.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="footer-cta reveal" id="rdv">
+  <div class="wrap">
+    <span class="label" data-i18n="ctaEyebrow">Next step</span>
+    <h2 data-i18n="ctaH2">Let's talk about what's slowing your team down.</h2>
+    <p data-i18n="ctaP">15 minutes is enough to identify where AI can save you time, money, or efficiency.</p>
+    <a href="https://calendly.com/YOUR-LINK" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="ctaBtn">Book a call on Calendly</a>
+  </div>
+</section>
+
+<footer class="site-footer" data-i18n="siteFooter">
+  AI engineer, architect of intelligent systems · Ottawa, ON · Replace with your contact details
+</footer>
+
+<script>
+  // Scroll-reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+  // Conference carousel controls
+  const carousel = document.getElementById('confCarousel');
+  const cardWidth = 340; // card + gap
+  document.getElementById('confNext').addEventListener('click', ()=>{
+    carousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+  });
+  document.getElementById('confPrev').addEventListener('click', ()=>{
+    carousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+  });
+
+  // ---------- Bilingual toggle (EN default, FR translation) ----------
+  const frTranslations = {
+    pageTitle: "Architecte de systèmes IA : solutions sur mesure pour entreprises",
+    navLogo: 'SYSTÈME<span>.</span>IA <span style="color:var(--text-dim)">// architecte de solutions IA</span>',
+    btnBookCall: "Prendre rendez-vous",
+    heroEyebrow: "Ingénieur IA, architecte de systèmes intelligents",
+    heroTitle: "Je conçois l'infrastructure qui transforme <em>deux semaines de travail</em> en trois jours.",
+    heroSub: "Agents vocaux, agents web, automatisation des courriels, tri de CV, cybersécurité IA : des systèmes sur mesure pour les entreprises qui perdent du temps, de l'argent, ou de l'efficacité sur des tâches répétitives.",
+    heroBtnSecondary: "Voir mes solutions",
+    heroCoords: "OTTAWA, ON · DISPONIBLE POUR CONSULTATION SUR PLACE",
+    aboutEyebrow: "Qui suis-je",
+    aboutH2: "Ingénieur IA, et vendeur de résultats.",
+    aboutP1: "Je suis <strong>ingénieur en intelligence artificielle</strong> et <strong>architecte de systèmes IA appliqués</strong>. Concrètement, je m'assois avec des entreprises, j'identifie où elles perdent du temps, de l'argent ou de l'efficacité, puis je construis la solution qui règle le problème.",
+    aboutP2: "Grâce à mon parcours en <strong>acquisition de clients</strong>, je ne fais pas que construire des systèmes intelligents : je sais aussi les vendre. Je trouve mes propres clients, en indépendant comme pour des équipes complètes, des agents vocaux aux infrastructures d'agents IA.",
+    portraitLabel: '<strong>Espace photo</strong>Portrait professionnel à intégrer, format 4:5',
+    pillar1Name: "Équipes soulagées",
+    pillar1P: "Les tâches répétitives sont prises en charge, pas ajoutées à la liste.",
+    pillar2Name: "Temps retrouvé",
+    pillar2P: "Vos équipes se concentrent sur ce qui compte vraiment.",
+    pillar3Name: "Efficacité multipliée",
+    pillar3P: "Un travail de deux semaines, livré en trois jours.",
+    confEyebrow: "Conférences",
+    confH2: "Sur scène, autant que sur le terrain.",
+    conf1Num: "Conf. 01",
+    conf1P: "Conférence sur l'intelligence artificielle appliquée, présentée devant un public d'entrepreneurs et de professionnels.",
+    conf1Tag: "IA appliquée aux affaires",
+    conf2Num: "Conf. 02",
+    conf2P: "Intervention sur l'usage concret de l'IA en entreprise, présentée en milieu collégial devant étudiants et professionnels.",
+    conf2Tag: "Formation et sensibilisation",
+    conf3Num: "Conf. 03",
+    conf3H3: "Immobilier",
+    conf3P: "Conférence destinée aux agents immobiliers et investisseurs sur l'automatisation de la qualification de prospects.",
+    conf3Tag: "Agents et investisseurs",
+    conf4Num: "Conf. 04",
+    conf4P: "Présentation sur l'usage de l'IA pour les traders, pour automatiser la recherche et l'analyse de marché.",
+    conf4Tag: "Marchés financiers",
+    conf5Num: "Conf. 05",
+    conf5P: "Conférence sur l'intégration de l'IA dans les stratégies d'acquisition et de conversion client.",
+    conf5Tag: "Acquisition client",
+    solEyebrow: "Solutions livrées",
+    solH2: "Quatre problèmes réels, quatre systèmes livrés.",
+    sol1Caption: "[ Vidéo à intégrer ]",
+    sol1Tag: "Clinique dentaire",
+    sol1H3: "Agent web de prise de rendez-vous",
+    sol1P: "Un agent IA intégré au site web qui répond aux patients et gère la prise de rendez-vous automatiquement.",
+    sol2Caption: "[ Vidéo à intégrer ]",
+    sol2Tag: "Agence immobilière",
+    sol2H3: "Agent web de qualification de prospects",
+    sol2P: "Un agent IA qui accueille les visiteurs du site, répond à leurs questions et qualifie les prospects avant transfert à l'équipe.",
+    sol3Caption: "[ Vidéo à intégrer ]",
+    sol3Tag: "Restaurant",
+    sol3H3: "Agent vocal de réservation",
+    sol3P: "Un agent vocal IA qui répond au téléphone et prend les réservations, sans faire attendre le client.",
+    sol4Caption: "[ Vidéo à intégrer ]",
+    sol4Tag: "Organisation",
+    sol4H3: "Agent de réponse aux courriels",
+    sol4P: "Un agent IA qui trie et répond aux courriels entrants, tout en filtrant les tentatives de phishing.",
+    ctaEyebrow: "Prochaine étape",
+    ctaH2: "Discutons de ce qui ralentit votre équipe.",
+    ctaP: "15 minutes suffisent pour identifier où l'IA peut vous faire gagner du temps, de l'argent ou de l'efficacité.",
+    ctaBtn: "Réserver un appel sur Calendly",
+    siteFooter: "Ingénieur IA, architecte de systèmes intelligents · Ottawa, ON · Remplacer par vos coordonnées de contact"
+  };
+
+  const i18nEls = document.querySelectorAll('[data-i18n]');
+  const originalEn = {};
+  i18nEls.forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(!(key in originalEn)) originalEn[key] = el.innerHTML;
+  });
+
+  function setLanguage(lang){
+    i18nEls.forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(lang === 'en'){
+        el.innerHTML = originalEn[key];
+      } else {
+        el.innerHTML = frTranslations[key] !== undefined ? frTranslations[key] : originalEn[key];
+      }
+    });
+    document.documentElement.lang = lang;
+    document.getElementById('langEn').classList.toggle('active', lang === 'en');
+    document.getElementById('langFr').classList.toggle('active', lang === 'fr');
+  }
+
+  document.getElementById('langEn').addEventListener('click', ()=> setLanguage('en'));
+  document.getElementById('langFr').addEventListener('click', ()=> setLanguage('fr'));
+</script>
+
+</body>
+</html>
