@@ -483,10 +483,7 @@
   <div class="wrap">
     <div class="about-grid">
       <div class="portrait">
-        <div class="portrait-label" data-i18n="portraitLabel">
-          <strong>Photo space</strong>
-          Professional portrait to be added, 4:5 format
-        </div>
+        <img src="media/Headshot (1).jpg" alt="Portrait professionnel" style="width:100%; height:100%; object-fit:cover; position:relative; z-index:1;">
       </div>
       <div class="about-text">
         <span class="label" data-i18n="aboutEyebrow">About me</span>
@@ -573,8 +570,10 @@
 
       <div class="solution-card">
         <div class="video-slot">
-          <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="video-caption" data-i18n="sol1Caption">[ Video to be added ]</span>
+          <video controls preload="metadata" style="width:100%; height:100%; object-fit:cover; position:relative; z-index:1;">
+            <source src="media/agent-dentiste.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéo.
+          </video>
         </div>
         <div class="solution-body">
           <span class="tag" data-i18n="sol1Tag">Dental clinic</span>
@@ -585,8 +584,10 @@
 
       <div class="solution-card">
         <div class="video-slot">
-          <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="video-caption" data-i18n="sol2Caption">[ Video to be added ]</span>
+          <video controls preload="metadata" style="width:100%; height:100%; object-fit:cover; position:relative; z-index:1;">
+            <source src="media/agent-immobilier.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéo.
+          </video>
         </div>
         <div class="solution-body">
           <span class="tag" data-i18n="sol2Tag">Real estate agency</span>
@@ -597,8 +598,10 @@
 
       <div class="solution-card">
         <div class="video-slot">
-          <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="video-caption" data-i18n="sol3Caption">[ Video to be added ]</span>
+          <video controls preload="metadata" style="width:100%; height:100%; object-fit:cover; position:relative; z-index:1;">
+            <source src="media/agent-vocal.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéo.
+          </video>
         </div>
         <div class="solution-body">
           <span class="tag" data-i18n="sol3Tag">Restaurant</span>
@@ -609,8 +612,10 @@
 
       <div class="solution-card">
         <div class="video-slot">
-          <div class="play-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="video-caption" data-i18n="sol4Caption">[ Video to be added ]</span>
+          <video controls preload="metadata" style="width:100%; height:100%; object-fit:cover; position:relative; z-index:1;">
+            <source src="media/email-ai-agent.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéo.
+          </video>
         </div>
         <div class="solution-body">
           <span class="tag" data-i18n="sol4Tag">Organization</span>
@@ -628,12 +633,12 @@
     <span class="label" data-i18n="ctaEyebrow">Next step</span>
     <h2 data-i18n="ctaH2">Let's talk about what's slowing your team down.</h2>
     <p data-i18n="ctaP">15 minutes is enough to identify where AI can save you time, money, or efficiency.</p>
-    <a href="https://calendly.com/YOUR-LINK" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="ctaBtn">Book a call on Calendly</a>
+    <a href="mailto:olivierkouta@gmail.com" class="btn btn-primary" data-i18n="ctaBtn">Contact me via Email</a>
   </div>
 </section>
 
 <footer class="site-footer" data-i18n="siteFooter">
-  AI engineer, architect of intelligent systems · Ottawa, ON · Replace with your contact details
+  AI engineer, architect of intelligent systems · Ottawa, ON · olivierkouta@gmail.com
 </footer>
 
 <script>
@@ -713,8 +718,8 @@
     ctaEyebrow: "Prochaine étape",
     ctaH2: "Discutons de ce qui ralentit votre équipe.",
     ctaP: "15 minutes suffisent pour identifier où l'IA peut vous faire gagner du temps, de l'argent ou de l'efficacité.",
-    ctaBtn: "Réserver un appel sur Calendly",
-    siteFooter: "Ingénieur IA, architecte de systèmes intelligents · Ottawa, ON · Remplacer par vos coordonnées de contact"
+    ctaBtn: "Me contacter par courriel",
+    siteFooter: "Ingénieur IA, architecte de systèmes intelligents · Ottawa, ON · olivierkouta@gmail.com"
   };
 
   const i18nEls = document.querySelectorAll('[data-i18n]');
